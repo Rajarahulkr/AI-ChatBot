@@ -28,9 +28,32 @@ def register_page():
         use_container_width=True
     ):
 
+        # Remove extra spaces
+        username = username.strip()
+        email = email.strip().lower()
+
+        # Validation
+        if not username:
+
+            st.error("Username is required.")
+
+            return
+
+        if not email:
+
+            st.error("Email is required.")
+
+            return
+
+        if not password:
+
+            st.error("Password is required.")
+
+            return
+
         if password != confirm:
 
-            st.error("Passwords do not match")
+            st.error("Passwords do not match.")
 
             return
 
@@ -43,6 +66,8 @@ def register_page():
         if success:
 
             st.success(message)
+
+            st.info("Please go to the Login page and sign in.")
 
         else:
 

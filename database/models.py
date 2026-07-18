@@ -1,6 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import Text
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
@@ -9,6 +10,10 @@ from datetime import datetime
 
 from database.database import Base
 
+
+# ==================================================
+# USER
+# ==================================================
 
 class User(Base):
 
@@ -44,9 +49,20 @@ class User(Base):
 
     chats = relationship(
         "Chat",
-        back_populates="user"
+        back_populates="user",
+        cascade="all, delete-orphan"
     )
 
+    memories = relationship(
+        "Memory",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
+
+# ==================================================
+# CHAT
+# ==================================================
 
 class Chat(Base):
 
@@ -79,9 +95,14 @@ class Chat(Base):
 
     messages = relationship(
         "Message",
-        back_populates="chat"
+        back_populates="chat",
+        cascade="all, delete-orphan"
     )
 
+
+# ==================================================
+# MESSAGE
+# ==================================================
 
 class Message(Base):
 
@@ -97,7 +118,7 @@ class Message(Base):
     )
 
     content = Column(
-        String
+        Text
     )
 
     created_at = Column(
@@ -113,4 +134,43 @@ class Message(Base):
     chat = relationship(
         "Chat",
         back_populates="messages"
+    )
+
+
+# ==================================================
+# MEMORY
+# ==================================================
+
+class Memory(Base):
+
+    __tablename__ = "memories"
+
+    id = Column(
+        Integer,
+        primary_key=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id")
+    )
+
+    key = Column(
+        String,
+        nullable=False
+    )
+
+    value = Column(
+        Text,
+        nullable=False
+    )
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow
+    )
+
+    user = relationship(
+        "User",
+        back_populates="memories"
     )

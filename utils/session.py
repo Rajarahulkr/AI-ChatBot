@@ -1,49 +1,33 @@
 import streamlit as st
-import uuid
+
+from services.chat_service import ChatService
 
 
 def initialize_session():
 
-    if "chats" not in st.session_state:
-
-        first_chat = str(uuid.uuid4())
-
-        st.session_state.chats = {
-            first_chat: {
-                "title": "New Chat",
-                "messages": []
-            }
-        }
-
-        st.session_state.current_chat = first_chat
-
-
-def get_current_chat():
-
-    return st.session_state.chats[
-        st.session_state.current_chat
-    ]
+    if "current_chat_id" not in st.session_state:
+        st.session_state.current_chat_id = None
 
 
 def new_chat():
 
-    chat_id = str(uuid.uuid4())
+    user = st.session_state.user
 
-    st.session_state.chats[chat_id] = {
-        "title": "New Chat",
-        "messages": []
-    }
+    chat = ChatService.create_chat(
+        user.id,
+        "New Chat"
+    )
 
-    st.session_state.current_chat = chat_id
+    st.session_state.current_chat_id = chat.id
+
+    return chat
 
 
-def delete_chat(chat_id):
+def load_chat(chat_id):
 
-    del st.session_state.chats[chat_id]
+    st.session_state.current_chat_id = chat_id
 
-    if len(st.session_state.chats) == 0:
-        new_chat()
 
-    st.session_state.current_chat = list(
-        st.session_state.chats.keys()
-    )[0]
+def get_current_chat_id():
+
+    return st.session_state.current_chat_id

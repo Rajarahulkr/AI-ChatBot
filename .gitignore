@@ -1,18 +1,11 @@
-# Virtual Environment
 venv/
-
-# Environment Variables
 .env
-
-# Python Cache
 __pycache__/
 *.pyc
-
-# Streamlit Cache
 .streamlit/
-
-# VS Code
 .vscode/
-
-# macOS
 .DS_Store
+
+uploads/
+vectorstore/
+data/chatbot.db

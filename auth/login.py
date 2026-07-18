@@ -1,6 +1,7 @@
 import streamlit as st
 
 from auth.auth_service import AuthService
+from services.chat_service import ChatService
 
 
 def login_page():
@@ -30,6 +31,12 @@ def login_page():
 
             st.session_state.logged_in = True
             st.session_state.user = user
+
+            # Create a new database chat after login
+            chat = ChatService.create_chat(user.id)
+
+            # Store current database chat id
+            st.session_state.db_chat_id = chat.id
 
             st.success("Login Successful")
 
