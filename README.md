@@ -84,11 +84,6 @@ AI-ChatBot/
 
 # 📸 Screenshots
 
-## 🔐 Login Page
-
-![Login](screenshots/login.png)
-
----
 
 ## 📝 Register Page
 
@@ -252,7 +247,7 @@ Each personality changes the chatbot's response style.
 
 # 💻 Author
 
-## Rahul Kumar
+## Raja Rahul Kumar
 
 ### GitHub
 
@@ -271,9 +266,3 @@ If you like this project, please consider giving it a ⭐ Star on GitHub.
 It motivates me to build more AI-powered open-source projects.
 
 ---
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
-Feel free to use, modify, and contribute to this project.
