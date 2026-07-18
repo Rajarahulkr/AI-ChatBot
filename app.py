@@ -1,5 +1,7 @@
 import time
 import streamlit as st
+from database.database import Base, engine
+from database import models
 
 from router import show_auth
 from services.ai_service import AIService
@@ -23,6 +25,12 @@ st.set_page_config(
     page_icon="🤖",
     layout="wide"
 )
+
+# ==================================================
+# CREATE DATABASE TABLES
+# ==================================================
+
+Base.metadata.create_all(bind=engine)
 
 
 # ==================================================
