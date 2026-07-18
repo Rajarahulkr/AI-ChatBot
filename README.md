@@ -66,7 +66,6 @@ AI-ChatBot/
 ├── utils/
 ├── vectorstore/
 ├── screenshots/
-│   ├── login.png
 │   ├── register.png
 │   ├── home.png
 │   ├── pdf_upload.png
